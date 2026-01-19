@@ -14,6 +14,8 @@ from .line_reference import LineReferenceStrategy
 from .chunked_verified import ChunkedVerifiedStrategy
 from .diff_insertion_only import DiffInsertionOnlyStrategy
 from .anchor_based import AnchorBasedStrategy
+from .inline_diff_verify import InlineDiffVerifyStrategy
+from .index_labeling import IndexLabelingStrategy
 
 __all__ = [
     "BaseStrategy",
@@ -25,6 +27,8 @@ __all__ = [
     "ChunkedVerifiedStrategy",
     "DiffInsertionOnlyStrategy",
     "AnchorBasedStrategy",
+    "InlineDiffVerifyStrategy",
+    "IndexLabelingStrategy",
 ]
 
 # Registry of all available strategies
@@ -37,6 +41,8 @@ STRATEGIES = {
     "chunked_verified": ChunkedVerifiedStrategy,
     "diff_insertion_only": DiffInsertionOnlyStrategy,
     "anchor_based": AnchorBasedStrategy,
+    "inline_diff_verify": InlineDiffVerifyStrategy,
+    "index_labeling": IndexLabelingStrategy,
 }
 
 

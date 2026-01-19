@@ -17,6 +17,8 @@ from .strategies import (
     ChunkedVerifiedStrategy,
     DiffInsertionOnlyStrategy,
     AnchorBasedStrategy,
+    InlineDiffVerifyStrategy,
+    IndexLabelingStrategy,
 )
 
 __version__ = "0.1.0"
@@ -35,4 +37,6 @@ __all__ = [
     "ChunkedVerifiedStrategy",
     "DiffInsertionOnlyStrategy",
     "AnchorBasedStrategy",
+    "InlineDiffVerifyStrategy",
+    "IndexLabelingStrategy",
 ]

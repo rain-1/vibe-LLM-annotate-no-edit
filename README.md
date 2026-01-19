@@ -12,7 +12,7 @@ When you ask an LLM to "annotate" a document, it often:
 - Changes formatting
 - Modifies code while adding comments
 
-This library solves that problem by implementing and benchmarking **8 different strategies** for getting annotations from LLMs while ensuring the original document remains untouched.
+This library solves that problem by implementing and benchmarking **10 different strategies** for getting annotations from LLMs while ensuring the original document remains untouched.
 
 ## Annotation Strategies
 
@@ -26,6 +26,8 @@ This library solves that problem by implementing and benchmarking **8 different 
 | `chunked_verified` | Split & verify each chunk | Good | Large documents |
 | `diff_insertion_only` | Unified diff with only `+` lines | Good | Code-savvy users |
 | `anchor_based` | Annotations attached to unique text | Excellent | Robust to changes |
+| `inline_diff_verify` | Insert tags, verify via difflib | **Rock-solid** | Speaker attribution |
+| `index_labeling` | LLM only returns labels, never text | **Guaranteed** | When preservation is critical |
 
 ## Installation
 
@@ -150,6 +152,38 @@ Annotations attached to unique text snippets.
 ```python
 annotator = Annotator(default_strategy="anchor_based")
 # {"anchor": "quick brown fox", "content": "..."}
+```
+
+### 9. Inline Diff Verify (`inline_diff_verify`)
+
+**Rock-solid verification** using Python's `difflib`. The LLM inserts tags using unusual delimiters (like `«Speaker»`), then we diff the output against the original. If ANY character was modified or deleted, the diff catches it.
+
+```python
+from llm_annotate.strategies import InlineDiffVerifyStrategy
+
+strategy = InlineDiffVerifyStrategy(
+    tag_start="«",
+    tag_end="»",
+)
+# Input:  "Hello," she said.
+# Output: «Narrator»"Hello," «Narrator»she said.
+# Diff verifies ONLY tag insertions occurred
+```
+
+### 10. Index Labeling (`index_labeling`)
+
+**100% preservation guaranteed** - the LLM never outputs the original text at all! We pre-split the document, send segments with indices, and the LLM only returns labels.
+
+```python
+from llm_annotate.strategies import IndexLabelingStrategy
+
+strategy = IndexLabelingStrategy(
+    split_by="sentence",  # or "paragraph", "line", "dialogue"
+    default_label="Narrator",
+)
+# Send: {1: "Hello, she said.", 2: "How are you?"}
+# LLM returns: {1: "Narrator", 2: "Character"}
+# Text is NEVER in the LLM output
 ```
 
 ## Comparing Strategies

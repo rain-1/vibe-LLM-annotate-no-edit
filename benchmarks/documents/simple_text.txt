@@ -1,0 +1,5 @@
+The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet. It has been used as a typing test since at least the late 19th century.
+
+Pangrams like this one are useful for testing fonts and keyboards. They ensure that every letter is displayed or typed correctly. The most famous English pangram is the one about the quick brown fox.
+
+Other pangrams exist in different languages. In German, for example, "Sphinx of black quartz, judge my vow" is a well-known pangram. Each language has its own set of common pangrams used for testing purposes.

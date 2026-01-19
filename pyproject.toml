@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-annotate"
+version = "0.1.0"
+description = "LLM-based document annotation with insertion-only guarantees"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "LLM Annotate Contributors"}
+]
+keywords = ["llm", "annotation", "document", "ai", "nlp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.18.0"]
+openai = ["openai>=1.0.0"]
+all = ["anthropic>=0.18.0", "openai>=1.0.0"]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+llm-annotate = "llm_annotate.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/rain-1/vibe-LLM-annotate-no-edit"
+Repository = "https://github.com/rain-1/vibe-LLM-annotate-no-edit"
+
+[tool.setuptools.packages.find]
+include = ["llm_annotate*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

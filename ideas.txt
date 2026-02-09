@@ -1,0 +1,3 @@
+experiment with putting the text-to-be-annotated into user vs assistant prefill (on prod models like clod)
+
+experiment with using a custom sampler to ensure perfect accuracy (on local models)
